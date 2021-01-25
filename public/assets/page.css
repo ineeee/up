@@ -3,7 +3,6 @@ html, body, h1, h2, p {
 	padding: 0;
 }
 
-/* page content */
 body {
 	font-family: Corbel, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", "Bitstream Vera Sans", "Liberation Sans", Verdana, "Verdana Ref", sans-serif;
 	color: #333;
@@ -22,7 +21,7 @@ header {
 }
 
 header h1 {
-	font-size: 2.6em;
+	font-size: 2.8em;
 }
 
 header .inner,
@@ -40,7 +39,7 @@ header nav a {
 	text-decoration: none;
 
 	display: inline-block;
-	margin-right: 0.4em;
+	margin-right: 0.6em;
 }
 
 header nav a.active,
@@ -48,13 +47,8 @@ header nav a:hover {
 	text-decoration: underline;
 }
 
-form label, form input, form textarea {
+form label, form input {
 	display: block;
-}
-
-form textarea {
-	width: 100%;
-	min-height: 2em;
 }
 
 footer {
@@ -63,6 +57,14 @@ footer {
 	text-align: center;
 }
 
-p, button {
+p, button, label, pre {
 	margin: 0.4em 0;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table tr {
+	border: 1px solid #ddd;
 }

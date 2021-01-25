@@ -4,14 +4,18 @@ declare(strict_types=1);
 define('ROOT', '/www/up');
 
 require ROOT . '/src/utilities.php';
+require ROOT . '/src/session.php';
 require ROOT . '/src/database.php';
+require ROOT . '/src/config.php';
 
-// $config = load_config();
+$config = new Config();
 $db = new Database();
-$sess = sess_start();
+$sess = new Session();
 
 $page = [
 	'name' => 'setup',
+	'session' => $sess,
+	'logged in' => false,
 	'needs setup' => false,
 	'invite key' => null,
 ];
@@ -22,6 +26,7 @@ if ($db->needs_setup()) {
 
 	$page['needs setup'] = true;
 	$page['invite key'] = $key;
+	$page['config'] = $config;
 }
 
 echo_template('setup', $page);

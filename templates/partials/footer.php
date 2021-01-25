@@ -1,4 +1,3 @@
 <footer>
-	<p>File uploading thing</p>
-	<p>Send suggestions <a href="https://github.com/inexist3nce/up">here</a></p>
+	<p>ヽ(*・ω・)ﾉ<a href="https://github.com/inexist3nce/up">♩♪♬</a></p>
 </footer>

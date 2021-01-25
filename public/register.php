@@ -4,16 +4,27 @@ declare(strict_types=1);
 define('ROOT', '/www/up');
 
 require ROOT . '/src/utilities.php';
+require ROOT . '/src/session.php';
 require ROOT . '/src/database.php';
 
 $db = new Database();
-$sess = sess_start();
+$sess = new Session();
 
 $page = [
 	'name' => 'register',
 	'status' => 'no key',
 	'user' => null,
+	'logged in' => $sess->get('logged in')
 ];
+
+// this file.
+
+
+
+// this file is a disaster.
+// sorry.
+
+
 
 if (isset($_GET['key']) && strlen($_GET['key']) > 1) {
 	$given_key = $_GET['key'];
@@ -22,14 +33,11 @@ if (isset($_GET['key']) && strlen($_GET['key']) > 1) {
 	$page['status'] = 'invalid key';
 	$page['key'] = $given_key;
 
-	if (is_key_valid($db, $key) === true) {
-
-	}
-
 	if ($key !== null) {
 		$timediff = time() - $key['timestamp'];
 
 		// expire key after 24 hours
+		// TODO use config
 		if ($timediff > 24 * 3600) {
 			$page['status'] = 'expired key';
 		} else {
@@ -55,24 +63,28 @@ if (isset($_GET['key']) && strlen($_GET['key']) > 1) {
 		// "your nick/password doesn't meet the min requirements"?
 		$page['status'] = 'missing stuff';
 	} else {
-		// check if the key is valid
-		$key = $db->get_key_info($given_key);
+		// check if the key is valid and get $user_id of who created it
+		$key = $db->get_invite_info($given_key);
 
 		if ($key === null) {
 			$page['status'] = 'invalid key';
 		} else {
-			// check if the user is taken
-			$user_info = $db->get_user_info($user);
+			$timediff = time() - $key['timestamp'];
 
-			if ($user_info !== null) {
-				$page['status'] = 'name taken';
+			// expire key after 24 hours
+			// TODO use config
+			if ($timediff > 24 * 3600) {
+				$page['status'] = 'expired key';
 			} else {
-				$db->create_user($user, $pass, $key['user_id']);
-				$page['status'] = 'success';
+				if ($db->user_exists($user)) {
+					$page['status'] = 'name taken';
+				} else {
+					$db->create_user($user, $pass, $key['user_id']);
+					$page['status'] = 'success';
+				}
 			}
-
 		}
 	}
 }
 
-echo_template('register-form', $page);
+echo_template('register', $page);

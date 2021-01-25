@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<link rel="stylesheet" type="text/css" href="css/page.css">
+	<?php echo_template('partials/head'); ?>
 	<title>about - up</title>
 </head>
 <body class="single-page">
@@ -13,15 +9,28 @@
 
 	<main>
 		<div class="inner">
-			<h3>what is this</h3>
-			<p>thing to upload files</p>
+			<h2>what</h2>
+			<p>its a website to upload files</p>
+			<br>
 
-			<h3>why</h3>
+			<h2>why</h2>
 			<p>i needed a place to share screenshots, but it would be nice to be able to manage the files (delete, rename, etc)</p>
+			<br>
 
-			<h3>how</h3>
-			<p><a href="https://github.com/inexist3nce/up">here</a>, source code on github</p>
+			<h2>how</h2>
+			<p><a href="https://github.com/inexist3nce/up">here</a>, the source code</p>
+			<br>
 
+			<h2>invite only?</h2>
+			<p>bandwidth isnt free and i need to avoid people uploading illegal stuff</p>
+			<br>
+
+			<h2>limits?</h2>
+			<p>nah, accounts don't have upload quotas or anything. the whole point of making it invite-only is to have a small, trusted group of people</p>
+			<br>
+
+			<h2>(☞ﾟヮﾟ)☞ ?</h2>
+			<p>☜(ﾟヮﾟ☜) !</p>
 		</div>
 	</main>
 

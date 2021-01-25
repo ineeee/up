@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<link rel="stylesheet" type="text/css" href="css/page.css">
+	<?php echo_template('partials/head'); ?>
 	<title>setup - up</title>
 </head>
 <body class="single-page">
@@ -16,6 +12,32 @@
 			<h2>Setup</h2>
 
 			<?php if ($page['needs setup'] === true) { ?>
+			<p>These are the currently configured settings:</p>
+
+			<table>
+				<tr>
+					<td>max file size</td>
+					<td><pre><code><?= $page['config']->get('max file size') ?></code></pre></td>
+				</tr>
+				<tr>
+					<td>invite expiration time</td>
+					<td><pre><code><?= $page['config']->get('invite expiration time') ?></code></pre></td>
+				</tr>
+				<tr>
+					<td>file slug length</td>
+					<td><pre><code><?= $page['config']->get('file slug length') ?></code></pre></td>
+				</tr>
+				<tr>
+					<td>public url</td>
+					<td><pre><code><?= $page['config']->get('public url') ?></code></pre></td>
+				</tr>
+				<tr>
+					<td>upload dir</td>
+					<td><pre><code><?= $page['config']->get('upload dir') ?></code></pre></td>
+				</tr>
+			</table>
+			<br>
+
 			<p>Configure the first user account</p>
 
 			<form action="register.php" method="POST">

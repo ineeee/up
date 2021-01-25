@@ -9,7 +9,8 @@ require ROOT . '/src/session.php';
 $sess = new Session();
 $page = [
 	'name' => 'about',
-	'session' => $sess->raw()
+	'session' => $sess->raw(),
+	'logged in' => $sess->get('logged in')
 ];
 
 echo_template('about', $page);
