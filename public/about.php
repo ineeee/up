@@ -7,8 +7,9 @@ require ROOT . '/src/utilities.php';
 require ROOT . '/src/session.php';
 
 $sess = new Session();
+$page = [
+	'name' => 'about',
+	'session' => $sess->raw()
+];
 
-$sess->unset('logged in');
-$sess->unset('user');
-
-header('Location: index.php');
+echo_template('about', $page);

@@ -1,0 +1,68 @@
+html, body, h1, h2, p {
+	margin: 0;
+	padding: 0;
+}
+
+/* page content */
+body {
+	font-family: Corbel, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", "Bitstream Vera Sans", "Liberation Sans", Verdana, "Verdana Ref", sans-serif;
+	color: #333;
+	font-size: 1.1em;
+}
+
+.single-page .inner {
+	max-width: 500px;
+	margin: 0 auto;
+}
+
+header {
+	/*background: linear-gradient(135deg, rgba(142,0,0,1) 0%, rgba(207,0,0,1) 35%, rgba(199,0,0,1) 100%);*/
+
+	text-align: center;
+}
+
+header h1 {
+	font-size: 2.6em;
+}
+
+header .inner,
+main .inner {
+	padding: 1em;
+}
+
+header nav {
+	margin-top: 0.6em;
+	font-size: 1.2em;
+}
+
+header nav a {
+	color: inherit;
+	text-decoration: none;
+
+	display: inline-block;
+	margin-right: 0.4em;
+}
+
+header nav a.active,
+header nav a:hover {
+	text-decoration: underline;
+}
+
+form label, form input, form textarea {
+	display: block;
+}
+
+form textarea {
+	width: 100%;
+	min-height: 2em;
+}
+
+footer {
+	margin-top: 1em;
+	font-size: 0.8em;
+	text-align: center;
+}
+
+p, button {
+	margin: 0.4em 0;
+}
