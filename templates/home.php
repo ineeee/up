@@ -20,7 +20,7 @@
 	<?php echo_template('partials/footer', $page); ?>
 
 	<!-- ugh, 300 kb of javascript -->
-	<script src="js/bundle.min.js"></script>
+	<script src="assets/bundle.min.js"></script>
 	<script>
 		const uppy = Uppy.Core({
 			debug: true,

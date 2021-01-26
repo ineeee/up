@@ -92,6 +92,22 @@ class Database {
 		return $key;
 	}
 
+	// get all invites an user has created
+	function get_user_invites(int $user_id): array {
+		$stmt = $this->db->prepare('
+			SELECT id, key, timestamp FROM invites WHERE user_id = :user_id
+		');
+		$stmt->bindParam(':user_id', $user_id, SQLITE3_INTEGER);
+		$result = $stmt->execute();
+
+		$invites = [];
+
+		while ($row = $result->fetchArray(SQLITE3_ASSOC))
+			$invites[] = $row;
+
+		return $invites;
+	}
+
 	// check if `users.pass` matches $pass, then return `users.id`
 	function check_password(string $user, string $pass): ?int {
 		$stmt = $this->db->prepare('
@@ -166,5 +182,50 @@ class Database {
 			return false;
 		else
 			return true;
+	}
+
+	function get_api_key_owner(string $api_key): ?array {
+		$stmt = $this->db->prepare('
+			SELECT id, user, invited_by FROM users WHERE api_key = :api_key
+		');
+		$stmt->bindParam(':api_key', $api_key, SQLITE3_TEXT);
+		$result = $stmt->execute();
+
+		$data = $result->fetchArray(SQLITE3_ASSOC);
+
+		if ($data === false)
+			return null;
+
+		return [
+			'id' => $data['id'],
+			'user' => $data['user'],
+			'api key' => $api_key,
+			'invited by' => $data['invited_by'],
+		];
+	}
+
+	function register_file(int $user_id, string $name, string $desc) {
+		$stmt = $this->db->prepare('
+			INSERT INTO files (user_id, filename, description) VALUES (:user_id, :filename, :description)
+		');
+		$stmt->bindParam(':user_id', $user_id, SQLITE3_INTEGER);
+		$stmt->bindParam(':filename', $name, SQLITE3_TEXT);
+		$stmt->bindParam(':description', $desc, SQLITE3_TEXT);
+		$stmt->execute();
+	}
+
+	function get_files(int $user_id): array {
+		$stmt = $this->db->prepare('
+			SELECT id, filename, description FROM files WHERE id = :user_id
+		');
+		$stmt->bindParam(':user_id', $user_id, SQLITE3_INTEGER);
+		$result = $stmt->execute();
+
+		$files = [];
+
+		while ($row = $result->fetchArray(SQLITE3_ASSOC))
+			$files[] = $row;
+
+		return $files;
 	}
 }

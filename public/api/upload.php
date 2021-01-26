@@ -29,6 +29,11 @@ foreach ($headers as $key => $value) {
 if ($request_key === null)
 	abort(401, 'need auth key');
 
+$user_info = $db->get_api_key_owner($request_key);
+
+if ($user_info === null)
+	abort(401, 'need auth key');
+
 if (!isset($_FILES) || empty($_FILES) || !array_key_exists('file', $_FILES))
 	abort(400, 'no file uploaded');
 
@@ -40,14 +45,15 @@ if (!array_key_exists('size', $file) || !isset($file['size']))
 if ($file['size'] > $config->get('max file size'))
 	abort(413, 'file too large');
 
-$name = random_string($config->get('file slug length'));
+$orig_name = $file['name'] ?? 'Untitled';
+$hash_name = random_string($config->get('file slug length'));
 
 // try to put an extension on it, check mime type
 if ($file['size'] > 64) {
 	$ext = try_get_filetype($file['tmp_name']);
 
 	if ($ext !== null) {
-		$name .= '.' . $ext;
+		$hash_name .= '.' . $ext;
 	}
 }
 
@@ -56,8 +62,7 @@ $dir = ROOT . '/public/' . $config->get('upload dir');
 if (!is_writable($dir))
 	abort(500, 'upload dir is not writable');
 
-$target_url = $config->get('upload dir') . '/' . $name;
-$target_path = $dir . '/' . $name;
+$target_path = $dir . '/' . $hash_name;
 
 $success = move_uploaded_file($file['tmp_name'], $target_path);
 
@@ -65,4 +70,6 @@ if ($success !== true) {
 	abort(500, 'unknown error while writing the file');
 }
 
-echo $config->get('public url') . $target_url;
+$db->register_file($user_info['id'], $hash_name, $orig_name);
+
+echo $config->get('public url') . $config->get('upload dir') . '/' . $hash_name;

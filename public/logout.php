@@ -9,6 +9,7 @@ require ROOT . '/src/session.php';
 $sess = new Session();
 
 $sess->unset('logged in');
-$sess->unset('user');
+$sess->unset('id');
+session_destroy();
 
 header('Location: index.php');
