@@ -24,5 +24,5 @@ if ($sess->get('logged in') !== true) {
 		'max size' => $config->get('max file size')
 	];
 
-	echo_template('home', $page);
+	echo_template('user/home', $page);
 }

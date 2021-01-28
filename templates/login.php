@@ -24,12 +24,12 @@
 			<form action="login.php" method="POST">
 				<label>
 					User
-					<input type="text" name="user">
+					<input type="text" name="user" minlength="4">
 				</label>
 
 				<label>
 					Pass
-					<input type="password" name="pass">
+					<input type="password" name="pass" minlength="8">
 				</label>
 
 				<button type="submit">Enter</button>

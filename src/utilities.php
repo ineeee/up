@@ -1,6 +1,8 @@
 <?php
 
-function echo_template(string $name, array $data=[]) {
+function echo_template(string $name, array $data=[], array $hack=[]) {
+	extract($hack); // ;)
+
 	$default_data = [
 		'template' => $name,
 		'name' => 'unknown'

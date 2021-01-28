@@ -7,6 +7,11 @@ require ROOT . '/src/utilities.php';
 require ROOT . '/src/session.php';
 
 $sess = new Session();
+if ($sess->get('logged in')) {
+	header('Location: index.php');
+	exit;
+}
+
 $page = [
 	'name' => 'login',
 	'session' => $sess->raw(),

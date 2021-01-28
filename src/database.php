@@ -216,7 +216,7 @@ class Database {
 
 	function get_files(int $user_id): array {
 		$stmt = $this->db->prepare('
-			SELECT id, filename, description FROM files WHERE id = :user_id
+			SELECT id, filename, description FROM files WHERE user_id = :user_id
 		');
 		$stmt->bindParam(':user_id', $user_id, SQLITE3_INTEGER);
 		$result = $stmt->execute();

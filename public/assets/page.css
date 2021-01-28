@@ -47,7 +47,8 @@ header nav a:hover {
 	text-decoration: underline;
 }
 
-form label, form input {
+form label,
+form input {
 	display: block;
 }
 
@@ -57,7 +58,7 @@ footer {
 	text-align: center;
 }
 
-p, button, label, pre {
+p, button, label, pre, ul {
 	margin: 0.4em 0;
 }
 
@@ -67,4 +68,9 @@ table {
 
 table tr {
 	border: 1px solid #ddd;
+}
+
+.code {
+	border: 1px solid #ddd;
+	overflow-x: scroll;
 }
